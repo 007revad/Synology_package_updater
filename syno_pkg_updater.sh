@@ -56,11 +56,11 @@ while [[ "$count" -lt "$qty" ]]; do
     # Update package
     if [[ "$id" ]]; then
         if [[ -n "$volume" ]]; then
-            echo -e "Updating $id on $volume \n"
+            echo "Updating $id on $volume"
             synopkg install_from_server "$id" "/$volume"
             #echo "synopkg install_from_server \"$id\" \"/$volume\""  # debug
         else
-            echo -e "Updating $id \n"
+            echo "Updating $id"
             synopkg install_from_server "$id"
             #echo "synopkg install_from_server \"$id\""  # debug
         fi
@@ -73,3 +73,4 @@ done
 echo -e "\nFinished"
 
 exit
+
