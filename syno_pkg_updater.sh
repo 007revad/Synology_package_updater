@@ -57,12 +57,12 @@ while [[ "$count" -lt "$qty" ]]; do
     if [[ "$id" ]]; then
         if [[ -n "$volume" ]]; then
             echo -e "Updating $id on $volume \n"
-            install_from_server "$id" "/$volume"
-            #echo "install_from_server \"$id\" \"/$volume\""  # debug
+            synopkg install_from_server "$id" "/$volume"
+            #echo "synopkg install_from_server \"$id\" \"/$volume\""  # debug
         else
             echo -e "Updating $id \n"
-            install_from_server "$id"
-            #echo "install_from_server \"$id\""  # debug
+            synopkg install_from_server "$id"
+            #echo "synopkg install_from_server \"$id\""  # debug
         fi
     fi
 
@@ -70,5 +70,6 @@ while [[ "$count" -lt "$qty" ]]; do
     count=$((count +1))
 done
 
-exit
+echo -e "\nFinished"
 
+exit
