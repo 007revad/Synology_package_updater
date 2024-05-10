@@ -1,2 +1,2 @@
-# Synology_package_updater
+# Synology package updater
 Check and update packages that have updates via SSH
