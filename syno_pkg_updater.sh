@@ -9,22 +9,8 @@
 # sudo /volume1/scripts/syno_pkg_updater.sh
 #------------------------------------------------------------------------------
 
-# [{"beta":false,"id":"git","name":"Git","version":"2.45.0-31"}]
-
 echo -e "Checking checking for package updates...\n"
 updates="$(synopkg checkupdateall)"
-
-#updates="[{"beta":false,"id":"git","name":"Git","version":"2.45.0-31"}{"beta":false,"id":"popcorn","name":"Popcorn","version":"10.1"}{"beta":false,"id":"foobar","name":"FooBar","version":"10.1"}]"
-
-#updates='[{"beta":false,"id":"git","name":"Git","version":"2.45.0-31"}\
-#    {"beta":false,"id":"Python3.9","name":"Python3.9","version":"3.9.14-0010"}\
-#    {"beta":false,"id":"LogCenter","name":"LogCenter","version":"1.2.5-1328"}]\
-#    {"beta":false,"id":"FileStation","name":"FileStation","version":"1.4.1-1559"}]'
-
-#updates='[{"beta":false,"id":"git","name":"Git","version":"2.45.0-31"}{"beta":false,"id":"Python3.9","name":"Python3.9","version":"3.9.14-0010"}'
-
-#updates='[{"beta":false,"id":"git","name":"Git","version":"2.45.0-31"}{"beta":false,"id":"Python3.9","name":"Python3.9","version":"3.9.14-0010"}{"beta":false,"id":"LogCenter","name":"LogCenter","version":"1.2.5-1328"}]{"beta":false,"id":"FileStation","name":"FileStation","version":"1.4.1-1559"}]'
-
 
 qty="$(echo "$updates" | grep -o '{' | wc -l)"
 #echo "qty: $qty"  # debug
@@ -42,9 +28,6 @@ while [[ "$count" -lt "$qty" ]]; do
     
     if echo "$string" | grep 'beta":false' >/dev/null; then
         id="$(echo "$string" | cut -d"," -f2 | cut -d':' -f2 | cut -d'"' -f2)"
-    #    echo "1 $id"  # debug
-    #else              # debug
-    #    echo "2"      # debug
     fi
 
     # Get installed volume
@@ -58,11 +41,9 @@ while [[ "$count" -lt "$qty" ]]; do
         if [[ -n "$volume" ]]; then
             echo "Updating $id on $volume"
             synopkg install_from_server "$id" "/$volume"
-            #echo "synopkg install_from_server \"$id\" \"/$volume\""  # debug
         else
             echo "Updating $id"
             synopkg install_from_server "$id"
-            #echo "synopkg install_from_server \"$id\""  # debug
         fi
     fi
 
